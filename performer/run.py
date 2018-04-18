@@ -43,8 +43,8 @@ def model0(img, name):
     print(np.expand_dims(img[:,:,0:], 0).shape)
     new_img = np.zeros((img.shape[0]*2, img.shape[1]*2, 3))
     size = 64
-    for x in np.arange(0, img.shape[0] + size, size):
-        for y in np.arange(0, img.shape[1] + size, size):
+    for x in np.arange(0, img.shape[0], size):
+        for y in np.arange(0, img.shape[1], size):
 
             # print(model.predict(np.ones((1,160,160,1))))
             chunk = img[x:x + size, y:y + size]
