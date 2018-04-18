@@ -42,7 +42,7 @@ def model0(img, name):
     print(img.shape)
     print(np.expand_dims(img[:,:,0:], 0).shape)
     new_img = np.zeros((img.shape[0]*2, img.shape[1]*2, 3))
-    size = 64*4
+    size = 64*2
     for x in np.arange(0, img.shape[0], size):
         for y in np.arange(0, img.shape[1], size):
 
