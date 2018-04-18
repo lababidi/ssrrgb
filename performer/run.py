@@ -47,9 +47,9 @@ def model0(img, name):
         for y in np.arange(0, img.shape[0] + size, size):
 
             # print(model.predict(np.ones((1,160,160,1))))
-            new_img[2 * x:2 * x + 2 * size, 2 * y:2 * y + 2 * size, 0] = model.predict(np.expand_dims(img[x:x+size,y:y+size,0:1], 0))[0,:,:,0]
-            new_img[2 * x:2 * x + 2 * size, 2 * y:2 * y + 2 * size, 1] = model.predict(np.expand_dims(img[x:x+size,y:y+size,1:2], 0))[0,:,:,0]
-            new_img[2 * x:2 * x + 2 * size, 2 * y:2 * y + 2 * size, 2] = model.predict(np.expand_dims(img[x:x+size,y:y+size,2:], 0))[0,:,:,0]
+            new_img[2 * x:2 * x + 2 * size, 2 * y:2 * y + 2 * size, 0] = model.predict(np.expand_dims(img[x:x+size,y:y+size,0:1], 0))[0][:,:,0]
+            new_img[2 * x:2 * x + 2 * size, 2 * y:2 * y + 2 * size, 1] = model.predict(np.expand_dims(img[x:x+size,y:y+size,1:2], 0))[0][:,:,0]
+            new_img[2 * x:2 * x + 2 * size, 2 * y:2 * y + 2 * size, 2] = model.predict(np.expand_dims(img[x:x+size,y:y+size,2:], 0))[0][:,:,0]
     print(new_img.shape)
     #
     cv2.imwrite(save, new_img)
