@@ -42,14 +42,14 @@ def model0(img, name):
     print(img.shape)
     print(np.expand_dims(img[:,:,0:], 0).shape)
     new_img = np.zeros((img.shape[0]*2, img.shape[1]*2, 3))
-    size = 64
+    size = 64*4
     for x in np.arange(0, img.shape[0], size):
         for y in np.arange(0, img.shape[1], size):
 
             # print(model.predict(np.ones((1,160,160,1))))
             chunk = img[x:x + size, y:y + size]
             new_chunk0 = model.predict(np.expand_dims(chunk[:,:,0:1], 0))[0]
-            print(new_chunk0.shape, chunk.shape)
+            # print(new_chunk0.shape, chunk.shape)
             new_img[2 * x:2 * x + 2 * size, 2 * y:2 * y + 2 * size, 1] = new_chunk0[:, :, 0]
             new_chunk1 = model.predict(np.expand_dims(img[x:x + size, y:y + size, 1:2], 0))[0]
             new_img[2 * x:2 * x + 2 * size, 2 * y:2 * y + 2 * size, 1] = new_chunk1[:, :, 0]
