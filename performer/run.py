@@ -48,7 +48,7 @@ def model0(img, name):
 
             # print(model.predict(np.ones((1,160,160,1))))
             new_chunk0 = model.predict(np.expand_dims(img[x:x + size, y:y + size, 0:1], 0))[0]
-            new_img[2 * x:2 * x + 2 * size, 2 * y:2 * y + 2 * size, 0] = new_chunk0[:, :, 0]
+            new_img[2 * x:2 * x + 2 * size, 2 * y:2 * y + 2 * size, 1] = new_chunk0[:, :, 0]
             new_chunk1 = model.predict(np.expand_dims(img[x:x + size, y:y + size, 1:2], 0))[0]
             new_img[2 * x:2 * x + 2 * size, 2 * y:2 * y + 2 * size, 1] = new_chunk1[:, :, 0]
             new_chunk2 = model.predict(np.expand_dims(img[x:x + size, y:y + size, 2:], 0))[0]
