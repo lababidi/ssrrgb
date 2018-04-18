@@ -49,7 +49,6 @@ def model0(img, name):
             # print(model.predict(np.ones((1,160,160,1))))
             chunk = img[x:x + size, y:y + size]
             new_chunk0 = model.predict(np.stack([chunk[:,:,0:1],chunk[:,:, 1:2], chunk[:,:,2:]]))[0]
-            print(new_chunk0.shape)
             new_img[2 * x:2 * x + 2 * size, 2 * y:2 * y + 2 * size, 0] = new_chunk0[0, :, :, 0]
             new_img[2 * x:2 * x + 2 * size, 2 * y:2 * y + 2 * size, 1] = new_chunk0[1, :, :, 0]
             new_img[2 * x:2 * x + 2 * size, 2 * y:2 * y + 2 * size, 2] = new_chunk0[2, :, :, 0]
