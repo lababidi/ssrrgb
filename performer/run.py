@@ -1,37 +1,17 @@
 import os
+from queue import Queue
 
 import cv2
-import numpy as np
-
 import keras
-
+import numpy as np
+import rasterio
 import tensorflow as tf
+import tqdm
+from rasterio import Affine
+from rasterio.windows import Window
 
-import scipy as sp
 
 
-def SubpixelConv2D(scale=4, name="subpixel"):
-    """
-    Keras layer to do subpixel convolution.
-    NOTE: Tensorflow backend only. Uses tf.depth_to_space
-    Ref:
-        [1] Real-Time Single Image and Video Super-Resolution Using an Efficient Sub-Pixel Convolutional Neural Network
-            Shi et Al.
-            https://arxiv.org/abs/1609.05158
-    :param name:
-    :param scale: upsampling scale. Default=4
-    :return:
-    """
-    # upsample using depth_to_space
-    def subpixel_shape(in_shape):
-        ret_shape1 = None if in_shape[1] is None else in_shape[1]*scale
-        ret_shape2 = None if in_shape[2] is None else in_shape[2]*scale
-        return tuple([in_shape[0], ret_shape1, ret_shape2, int(in_shape[3] // (scale*scale))])
-
-    def subpixel(x):
-        return tf.depth_to_space(x, scale)
-
-    return Lambda(subpixel, output_shape=subpixel_shape, name=name)
 
 
 
@@ -65,12 +45,16 @@ def SubpixelConv2D(scale=4, name="subpixel"):
 ###############################################################################
 
 
-model = keras.models.load_model('m1.h5', custom_objects={"tf":tf})
+model = keras.models.load_model('superres_v3.0_2018-01-25 22:38:29.338372.h5', custom_objects={"tf":tf})
 
 #   An example model that makes no changes to the input image
 def model0(img, name):
     save = os.path.join('.', 'root', 'output0', name)
-    new_img = model.predict(np.expand_dims(img, 0))[0][0]
+    print(save)
+    red_chan = model.predict(np.expand_dims(img, 0)[:,:,0:1])
+    blu_chan = model.predict(np.expand_dims(img, 0)[:,:,1:2])
+    gre_chan = model.predict(np.expand_dims(img, 0)[:,:,2:])
+    new_img = np.stack([red_chan, blu_chan, gre_chan], axis=-1)
     print(new_img.shape)
 
     cv2.imwrite(save, new_img)
