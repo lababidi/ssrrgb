@@ -39,6 +39,8 @@ model = keras.models.load_model('superres_v3.0_2018-01-25 22:38:29.338372.h5', c
 def model0(img, name):
     save = os.path.join('.', 'root', 'output0', name)
     print(save)
+    print(img.shape)
+    print(np.expand_dims(img, 0)[:,:,0].shape)
     red_chan = model.predict(np.expand_dims(img, 0)[:,:,0])
     blu_chan = model.predict(np.expand_dims(img, 0)[:,:,1])
     gre_chan = model.predict(np.expand_dims(img, 0)[:,:,2])
