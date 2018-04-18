@@ -41,11 +41,15 @@ def model0(img, name):
     print(save)
     print(img.shape)
     print(np.expand_dims(img[:,:,0:], 0).shape)
-    # print(model.predict(np.ones((1,160,160,1))))
-    red_chan = model.predict(np.expand_dims(img[:,:,0:1], 0))
-    blu_chan = model.predict(np.expand_dims(img[:,:,1:2], 0))
-    gre_chan = model.predict(np.expand_dims(img[:,:,2:], 0))
-    new_img = np.stack([red_chan, blu_chan, gre_chan], axis=-1)
+    new_img = np.zeros((img.shape[0]*2, img.shape[1]*2, 3))
+    size = 64
+    for x in np.arange(0, img.shape[1] + size, size):
+        for y in np.arange(0, img.shape[0] + size, size):
+
+            # print(model.predict(np.ones((1,160,160,1))))
+            new_img[2 * x:2 * x + 2 * size, 2 * y:2 * y + 2 * size, 0] = model.predict(np.expand_dims(img[:,:,0:1], 0))[0]
+            new_img[2 * x:2 * x + 2 * size, 2 * y:2 * y + 2 * size, 1] = model.predict(np.expand_dims(img[:,:,1:2], 0))[0]
+            new_img[2 * x:2 * x + 2 * size, 2 * y:2 * y + 2 * size, 2] = model.predict(np.expand_dims(img[:,:,2:], 0))[0]
     print(new_img.shape)
     #
     cv2.imwrite(save, new_img)
