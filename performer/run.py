@@ -40,15 +40,15 @@ def model0(img, name):
     save = os.path.join('.', 'root', 'output0', name)
     print(save)
     print(img.shape)
-    print(np.expand_dims(img[:,:,0], 0).shape)
-    print(model.predict(np.ones((1,16,16,1))))
-    # red_chan = model.predict(np.expand_dims(img[:,:,0:], 0))
-    # blu_chan = model.predict(np.expand_dims(img[:,:,1:], 0))
-    # gre_chan = model.predict(np.expand_dims(img[:,:,2:], 0))
-    # new_img = np.stack([red_chan, blu_chan, gre_chan], axis=-1)
-    # print(new_img.shape)
+    print(np.expand_dims(img[:,:,0:], 0).shape)
+    # print(model.predict(np.ones((1,160,160,1))))
+    red_chan = model.predict(np.expand_dims(img[:,:,0:1], 0))
+    blu_chan = model.predict(np.expand_dims(img[:,:,1:2], 0))
+    gre_chan = model.predict(np.expand_dims(img[:,:,2:], 0))
+    new_img = np.stack([red_chan, blu_chan, gre_chan], axis=-1)
+    print(new_img.shape)
     #
-    # cv2.imwrite(save, new_img)
+    cv2.imwrite(save, new_img)
 
 #   An example model that performs a median blur on the input image
 def model1(img, name):
