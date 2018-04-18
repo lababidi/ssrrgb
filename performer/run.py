@@ -41,9 +41,9 @@ def model0(img, name):
     print(save)
     print(img.shape)
     print(np.expand_dims(img[:,:,0], 0).shape)
-    red_chan = model.predict([img[:,:,0]])
-    blu_chan = model.predict([img[:,:,1]])
-    gre_chan = model.predict([img[:,:,2]])
+    red_chan = model.predict(np.expand_dims(img[:,:,0:], 0))
+    blu_chan = model.predict(np.expand_dims(img[:,:,1:], 0))
+    gre_chan = model.predict(np.expand_dims(img[:,:,2:], 0))
     new_img = np.stack([red_chan, blu_chan, gre_chan], axis=-1)
     print(new_img.shape)
 
