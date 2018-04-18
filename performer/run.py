@@ -1,21 +1,9 @@
 import os
-from queue import Queue
 
 import cv2
 import keras
 import numpy as np
-import rasterio
 import tensorflow as tf
-import tqdm
-from rasterio import Affine
-from rasterio.windows import Window
-
-
-
-
-
-
-
 
 ###############################################################################
 #   Here are three example model submissions.
