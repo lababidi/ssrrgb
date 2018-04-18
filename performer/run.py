@@ -36,26 +36,27 @@ import tensorflow as tf
 model = keras.models.load_model('superres_v3.0_2018-01-25 22:38:29.338372.h5', custom_objects={"tf":tf})
 
 #   An example model that makes no changes to the input image
-def model0(img_in, name):
+def model0(img, name):
     save = os.path.join('.', 'root', 'output0', name)
     print(save)
-    print(img_in.shape)
-    print(np.expand_dims(img_in[:, :, 0:], 0).shape)
-    new_img = np.zeros((img_in.shape[0] * 2, img_in.shape[1] * 2, 3))
+    print(img.shape)
+    print(np.expand_dims(img[:,:,0:], 0).shape)
+    new_img = np.zeros((img.shape[0]*2, img.shape[1]*2, 3))
     size = 32
     apron = 2
-    img = cv2.copyMakeBorder(img_in, apron, apron, apron, apron, cv2.BORDER_REFLECT)
-    for x in np.arange(0, img.shape[0], size - 2 * apron):
-        for y in np.arange(0, img.shape[1], size - 2 * apron):
+    img = cv2.copyMakeBorder(img, apron, apron, apron, apron, cv2.BORDER_REFLECT)
+    for x in np.arange(0, img.shape[0], size - 2*apron):
+        for y in np.arange(0, img.shape[1], size - 2*apron):
 
             # print(model.predict(np.ones((1,160,160,1))))
             chunk = img[x:x + size, y:y + size]
             new_chunk0 = model.predict(np.stack([chunk[:,:,0:1],chunk[:,:, 1:2], chunk[:,:,2:]]))[0]
             print(chunk.shape, new_chunk0.shape)
-            if new_chunk0.shape[0]>4 and new_chunk0.shape[1]>4:
-                new_img[2 * x+apron:2 * x + 2 * size-apron*3, 2 * y +apron:2 * y + 2 * size -apron*3, 0] = new_chunk0[0, apron*2:-apron*2, apron*2:-apron*2, 0]
-                new_img[2 * x+apron:2 * x + 2 * size-apron*3, 2 * y +apron:2 * y + 2 * size -apron*3, 1] = new_chunk0[1, apron*2:-apron*2, apron*2:-apron*2, 0]
-                new_img[2 * x+apron:2 * x + 2 * size-apron*3, 2 * y +apron:2 * y + 2 * size -apron*3, 2] = new_chunk0[2, apron*2:-apron*2, apron*2:-apron*2, 0]
+            # if new_chunk0.shape[0]>4 and new_chunk0.shape[1]>4:
+            if True:
+                new_img[2 * x+apron*2:2 * x + 2 * size-apron*2, 2 * y +apron*2:2 * y + 2 * size -apron*2, 0] = new_chunk0[0, apron*2:-apron*2, apron*2:-apron*2, 0]
+                new_img[2 * x+apron*2:2 * x + 2 * size-apron*2, 2 * y +apron*2:2 * y + 2 * size -apron*2, 1] = new_chunk0[1, apron*2:-apron*2, apron*2:-apron*2, 0]
+                new_img[2 * x+apron*2:2 * x + 2 * size-apron*2, 2 * y +apron*2:2 * y + 2 * size -apron*2, 2] = new_chunk0[2, apron*2:-apron*2, apron*2:-apron*2, 0]
     print(new_img)
     #
     cv2.imwrite(save, new_img)
