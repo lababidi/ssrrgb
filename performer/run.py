@@ -41,9 +41,9 @@ def model0(img, name):
     print(save)
     print(img.shape)
     print(np.expand_dims(img[:,:,0:], 0).shape)
-    new_img = np.zeros((img.shape[0]*2, img.shape[1]*2, 3))
     size = 32
     apron = 2
+    new_img = np.zeros((img.shape[0]*2 + 2*apron, img.shape[1]*2 + 2*apron, 3))
     img = cv2.copyMakeBorder(img, apron, apron, apron, apron, cv2.BORDER_REFLECT)
     for x in np.arange(0, img.shape[0], size - 2*apron):
         for y in np.arange(0, img.shape[1], size - 2*apron):
@@ -53,6 +53,7 @@ def model0(img, name):
             new_chunk0 = model.predict(np.stack([chunk[:,:,0:1],chunk[:,:, 1:2], chunk[:,:,2:]]))[0]
             print(chunk.shape, new_chunk0.shape)
             # if new_chunk0.shape[0]>4 and new_chunk0.shape[1]>4:
+            # if new_img[2 * x+apron*2:2 * x + 2 * size-apron*2, 2 * y +apron*2:2 * y + 2 * size -apron*2, 0].shape == new_chunk0[0, apron*2:-apron*2, apron*2:-apron*2, 0]:
             if True:
                 new_img[2 * x+apron*2:2 * x + 2 * size-apron*2, 2 * y +apron*2:2 * y + 2 * size -apron*2, 0] = new_chunk0[0, apron*2:-apron*2, apron*2:-apron*2, 0]
                 new_img[2 * x+apron*2:2 * x + 2 * size-apron*2, 2 * y +apron*2:2 * y + 2 * size -apron*2, 1] = new_chunk0[1, apron*2:-apron*2, apron*2:-apron*2, 0]
