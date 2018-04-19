@@ -115,4 +115,5 @@ if __name__ == '__main__':
         model0(np.copy(img), p)
         #model1(np.copy(img), p)   # uncomment to use more than one model
         #model2(np.copy(img), p)   # uncomment to use more than one model
-
+    from keras import backend as K
+    K.clear_session()
