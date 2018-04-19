@@ -40,8 +40,8 @@ RUN pip3 --no-cache-dir install \
         opencv-python \
         Keras==2.0.8 \
         Pillow \
-        scikit-learn==0.19.0 \
-        scikit-image==0.13.1 \
+        scikit-learn \
+        scikit-image \
         h5py
 
 
