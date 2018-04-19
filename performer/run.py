@@ -32,8 +32,11 @@ import tensorflow as tf
 #       Ubuntu supported .jpeg, .jpg, .tiff, .tif, .png format.
 ###############################################################################
 
+try:
+    model = keras.models.load_model('superres_v3.0_2018-01-25 22:38:29.338372.h5', custom_objects={"tf":tf})
+except:
+    model = keras.models.load_model('/root/performer/superres_v3.0_2018-01-25 22:38:29.338372.h5', custom_objects={"tf": tf})
 
-model = keras.models.load_model('superres_v3.0_2018-01-25 22:38:29.338372.h5', custom_objects={"tf":tf})
 
 #   An example model that makes no changes to the input image
 def model0(img, name):
