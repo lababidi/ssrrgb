@@ -37,7 +37,7 @@ model = keras.models.load_model('superres_v3.0_2018-01-25 22:38:29.338372.h5', c
 
 #   An example model that makes no changes to the input image
 def model0(img, name):
-    save = os.path.join('.', 'root', 'output0', name)
+    save = os.path.join('/root', 'output0', name)
     print(save)
     print(img.shape)
     print(np.expand_dims(img[:,:,0:], 0).shape)
@@ -63,24 +63,24 @@ def model0(img, name):
     cv2.imwrite(save, new_img)
 
 #   An example model that performs a median blur on the input image
-def model1(img, name):
-    save = os.path.join('', 'root', 'output1', name)
-
-    cv2.medianBlur(img, 3)
-
-    cv2.imwrite(save, img)
+# def model1(img, name):
+#     save = os.path.join('', 'root', 'output1', name)
+#
+#     cv2.medianBlur(img, 3)
+#
+#     cv2.imwrite(save, img)
 
 #   An example model that switches channel order
 #   and changes image compression on the input image
-def model2(img, name):
-    save = os.path.join('', 'root', 'output2', name)
-
-    red = img[:,:,2].copy()
-    blue = img[:,:,0].copy()
-    img[:,:,0] = red
-    img[:,:,2] = blue
-
-    cv2.imwrite(save.split('.')[0]+'.tif', img)
+# def model2(img, name):
+#     save = os.path.join('', 'root', 'output2', name)
+#
+#     red = img[:,:,2].copy()
+#     blue = img[:,:,0].copy()
+#     img[:,:,0] = red
+#     img[:,:,2] = blue
+#
+#     cv2.imwrite(save.split('.')[0]+'.tif', img)
 
 
 
@@ -89,8 +89,8 @@ if __name__ == '__main__':
     #   This is the path to where the input images will be when
     #   this container is executed by the organizers. Changing
     #   this path will fail to produce results. DO NOT CHANGE.
-    #input_ = '/root/input'
-    input_ = './root/input'
+    input_ = '/root/input'
+    # input_ = './root/input'
 
     paths = os.listdir(input_)
 
