@@ -32,17 +32,17 @@ RUN apt-get update -y && apt-get install -y \
 
 # Here are some base python libraries that are installed.
 # Feel free to add and remove any as needed.
-RUN apt-get install -y python-dev python3-dev \
-  python3-pip libopencv-dev python-opencv \
-    python-numpy python-scipy python-matplotlib \
+RUN apt-get install -y python3-dev \
+  python3-pip libopencv-dev \
       python3-numpy python3-scipy python3-matplotlib
 
 RUN pip3 --no-cache-dir install \
+        opencv-python \
         Keras==2.0.8 \
-        Pillow==4.2.1 \
+        Pillow \
         scikit-learn==0.19.0 \
         scikit-image==0.13.1 \
-        h5py \
+        h5py
 
 
 # This is just an example of copying the performer's
@@ -61,6 +61,6 @@ COPY performer /root/performer
 # provided example run.py. However, python does
 # not have to be used as long as the outcome is
 # identical.
-ENTRYPOINT ["python", "/root/performer/run.py"]
+ENTRYPOINT ["python3", "/root/performer/run.py"]
 
 
