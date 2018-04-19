@@ -43,10 +43,7 @@ RUN pip3 --no-cache-dir install \
         scikit-learn==0.19.0 \
         scikit-image==0.13.1 \
         h5py \
-        attrs==17.3.0 \
-        sh \
-        && \
-    python3 -m ipykernel.kernelspec
+
 
 # This is just an example of copying the performer's
 # model(s) into the docker container. When docker build
