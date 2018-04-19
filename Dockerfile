@@ -38,7 +38,7 @@ RUN apt-get install -y python3-dev \
 
 RUN pip3 --no-cache-dir install \
         opencv-python \
-        tensorflow-gpu==1.5 \
+        tensorflow-gpu==1.4 \
         Keras==2.0.8 \
         Pillow \
 #        scikit-learn \
