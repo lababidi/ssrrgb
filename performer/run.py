@@ -54,7 +54,7 @@ def model0(img, name):
             # print(model.predict(np.ones((1,160,160,1))))
             chunk = img[x:x + size, y:y + size]
             new_chunk0 = model.predict(np.stack([chunk[:,:,0:1],chunk[:,:, 1:2], chunk[:,:,2:]]))[0]
-            print(chunk.shape, new_chunk0.shape)
+            # print(chunk.shape, new_chunk0.shape)
             # if new_chunk0.shape[0]>4 and new_chunk0.shape[1]>4:
             # if new_img[2 * x+apron*2:2 * x + 2 * size-apron*2, 2 * y +apron*2:2 * y + 2 * size -apron*2, 0].shape == new_chunk0[0, apron*2:-apron*2, apron*2:-apron*2, 0]:
             if True:
