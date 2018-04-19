@@ -38,11 +38,11 @@ RUN apt-get install -y python3-dev \
 
 RUN pip3 --no-cache-dir install \
         opencv-python \
-        tensorflow-gpu \
+        tensorflow-gpu==1.6 \
         Keras==2.0.8 \
         Pillow \
-        scikit-learn \
-        scikit-image \
+#        scikit-learn \
+#        scikit-image \
         h5py
 
 
