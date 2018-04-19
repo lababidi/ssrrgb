@@ -61,7 +61,7 @@ def model0(img, name):
                 new_img[2 * x+apron*2:2 * x + 2 * size-apron*2, 2 * y +apron*2:2 * y + 2 * size -apron*2, 0] = new_chunk0[0, apron*2:-apron*2, apron*2:-apron*2, 0]
                 new_img[2 * x+apron*2:2 * x + 2 * size-apron*2, 2 * y +apron*2:2 * y + 2 * size -apron*2, 1] = new_chunk0[1, apron*2:-apron*2, apron*2:-apron*2, 0]
                 new_img[2 * x+apron*2:2 * x + 2 * size-apron*2, 2 * y +apron*2:2 * y + 2 * size -apron*2, 2] = new_chunk0[2, apron*2:-apron*2, apron*2:-apron*2, 0]
-    print(new_img)
+    # print(new_img)
     #
     cv2.imwrite(save, new_img)
 
